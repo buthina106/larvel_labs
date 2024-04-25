@@ -13,8 +13,8 @@ class PostController extends Controller
 {
     public function index(){
 
-        $posts = Post::all();
-        
+        // $posts = Post::all();
+        $posts = Post::with('user')->paginate(10);
         return PostResource::collection($posts); 
     }
 
@@ -28,7 +28,8 @@ class PostController extends Controller
             ]
             );
 
-        return $post;
+        // return $post;
+        return new PostResource($post);
     }
 
     public function show($id){
